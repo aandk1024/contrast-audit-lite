@@ -1,0 +1,102 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcontrastaudit0dk"]
+
+[ext_resource type="Script" path="res://addons/contrast_audit/ui/audit_dock.gd" id="1_dock"]
+
+[node name="Contrast Audit" type="VBoxContainer"]
+custom_minimum_size = Vector2(240, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+script = ExtResource("1_dock")
+
+[node name="LevelRow" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="LevelRow"]
+custom_minimum_size = Vector2(76, 0)
+layout_mode = 2
+text = "Level"
+
+[node name="Level" type="OptionButton" parent="LevelRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "WCAG 2.1 conformance level to measure against."
+
+[node name="FontRow" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="FontLabel" type="Label" parent="FontRow"]
+custom_minimum_size = Vector2(76, 0)
+layout_mode = 2
+text = "Min font"
+
+[node name="MinFont" type="SpinBox" parent="FontRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 6.0
+max_value = 48.0
+value = 12.0
+suffix = "px"
+tooltip_text = "House rule, not a WCAG number - the guidelines set no minimum font size."
+
+[node name="TargetRow" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TargetLabel" type="Label" parent="TargetRow"]
+custom_minimum_size = Vector2(76, 0)
+layout_mode = 2
+text = "Min target"
+
+[node name="MinTarget" type="SpinBox" parent="TargetRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 8.0
+max_value = 96.0
+value = 24.0
+suffix = "px"
+tooltip_text = "WCAG 2.2 SC 2.5.8 asks 24x24. SC 2.5.5 (AAA) asks 44x44."
+
+[node name="Sep" type="HSeparator" parent="."]
+layout_mode = 2
+
+[node name="CheckAll" type="Button" parent="."]
+layout_mode = 2
+tooltip_text = "Lay every scene out with the game's theme and measure contrast, font size and clickable area."
+text = "Check all scenes"
+
+[node name="CheckOpen" type="Button" parent="."]
+layout_mode = 2
+tooltip_text = "Same checks, but only on the scene currently open in the editor."
+text = "Check open scene"
+
+[node name="Sep2" type="HSeparator" parent="."]
+layout_mode = 2
+
+[node name="ExportRow" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="SaveMd" type="Button" parent="ExportRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Write the last report to res://contrast_audit_report.md"
+text = "Save .md"
+
+[node name="SaveJson" type="Button" parent="ExportRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Write the last report to res://contrast_audit_report.json for a build server."
+text = "Save .json"
+
+[node name="Sep3" type="HSeparator" parent="."]
+layout_mode = 2
+
+[node name="Log" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+scroll_following = true
+selection_enabled = true

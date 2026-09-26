@@ -1,0 +1,31 @@
+; Contrast Audit - Godot 4 UI readability audit addon
+; Engine configuration file.
+
+config_version=5
+
+[application]
+
+config/name="Contrast Audit"
+; The buyer opens the project and presses play. This is the screen they land
+; on, and it has one of every fault planted in it.
+run/main_scene="res://demo/main.tscn"
+config/features=PackedStringArray("4.4", "Forward Plus")
+
+[display]
+
+window/size/viewport_width=1152
+window/size/viewport_height=648
+
+[editor_plugins]
+
+; Saved enabled, so plugin.gd runs the moment the editor opens the project.
+; If enabling it were going to break, it breaks in the startup log where the
+; test harness can see it.
+enabled=PackedStringArray("res://addons/contrast_audit/plugin.cfg")
+
+[rendering]
+
+; The clear colour is the last thing behind every control, so the checks read
+; against it when a screen paints no background of its own. Pinned here so
+; the demo's numbers are reproducible on the buyer's machine.
+environment/defaults/default_clear_color=Color(0.16, 0.17, 0.2, 1)

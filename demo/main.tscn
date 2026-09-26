@@ -1,0 +1,145 @@
+[gd_scene load_steps=6 format=3 uid="uid://bcontrastaudit0dem"]
+
+[ext_resource type="Script" path="res://demo/main.gd" id="1_main"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_flat"]
+
+[sub_resource type="Gradient" id="Gradient_banner"]
+offsets = PackedFloat32Array(0, 1)
+colors = PackedColorArray(0.05, 0.05, 0.08, 1, 0.85, 0.86, 0.9, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_banner"]
+gradient = SubResource("Gradient_banner")
+width = 420
+height = 48
+fill_from = Vector2(0, 0)
+fill_to = Vector2(1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+bg_color = Color(0.21, 0.22, 0.26, 1)
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_main")
+
+[node name="Bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.16, 0.17, 0.2, 1)
+
+[node name="Rows" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 24.0
+offset_right = -32.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Rows"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Contrast Audit demo"
+
+[node name="Hint" type="Label" parent="Rows"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.86, 0.9, 1)
+text = "One of every fault the addon reports is planted on this screen."
+
+[node name="LowContrast" type="Label" parent="Rows"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.31, 0.35, 1)
+text = "PLANTED: grey on grey - fails WCAG AA for text contrast"
+
+[node name="FadedLabel" type="Label" parent="Rows"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.25)
+text = "PLANTED: white, but at 25% alpha - the inspector swatch looks fine"
+
+[node name="TinyText" type="Label" parent="Rows"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.93, 0.96, 1)
+theme_override_font_sizes/font_size = 9
+text = "PLANTED: 9px - readable contrast, unreadable size"
+
+[node name="Banner" type="Control" parent="Rows"]
+custom_minimum_size = Vector2(420, 48)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Img" type="TextureRect" parent="Rows/Banner"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_banner")
+
+[node name="BannerText" type="Label" parent="Rows/Banner"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "PLANTED: text on a picture"
+
+[node name="Card" type="PanelContainer" parent="Rows"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="CardRow" type="HBoxContainer" parent="Rows/Card"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Ok" type="Button" parent="Rows/Card/CardRow"]
+layout_mode = 2
+text = "Fine as it is"
+
+[node name="Off" type="Button" parent="Rows/Card/CardRow"]
+layout_mode = 2
+disabled = true
+theme_override_colors/font_disabled_color = Color(0.28, 0.29, 0.33, 1)
+text = "PLANTED: unreadable once disabled"
+
+[node name="Close" type="Button" parent="Rows/Card/CardRow"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.95, 0.95, 0.97, 1)
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_flat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flat")
+tooltip_text = "PLANTED: a close button far below the 24x24 minimum"
+text = "x"
+
+[node name="Spacer" type="Control" parent="Rows"]
+layout_mode = 2
+size_flags_vertical = 3
